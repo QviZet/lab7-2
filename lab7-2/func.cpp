@@ -1,6 +1,6 @@
 #include "header.h"
 
-void sortPart(double* arr, int len) {
+void sortPart(std::string name, double* arr, int len) {
 	double min = 1001;
 	int minNum = 0;
 	auto beginSort = std::chrono::steady_clock::now();
@@ -17,9 +17,16 @@ void sortPart(double* arr, int len) {
 		arr[minNum] = min;
 		min = 1001;
 	}
+	for (int i = 0; i < len; i++)
+	{
+		std::cout <<"\n"<< name << "\t";
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		std::cout << arr[i];
+	}
 }
 
-void sortArr(double* arr, double* frstPart, double* scndPart, int len) {
+void sortArr(std::string name, double* arr, double* frstPart, double* scndPart, int len) {
+	
 	int frst = 0, scnd = 0, k = 0;
 	while ((frst != len / 2) && (scnd != len / 2)) {
 		if (frstPart[frst] < scndPart[scnd]) {
@@ -42,5 +49,11 @@ void sortArr(double* arr, double* frstPart, double* scndPart, int len) {
 		arr[k] = scndPart[scnd];
 		k++;
 		scnd++;
+	}
+	for (int i = 0; i < len; i++)
+	{
+		std::cout << "\n" << name << "\t";
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		std::cout << arr[i];
 	}
 }

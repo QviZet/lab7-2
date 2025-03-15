@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include <chrono>
-#include <algorithm>
+#include <future>
+#include <string>
 
-void sortPart(double* arr, int len);
+void sortPart(std::string name, double* arr, int len);
 
-void sortArr(double* arr, double* frstPart, double* scndPart, int num);
+void sortArr(std::string name, double* arr, double* frstPart, double* scndPart, int num);

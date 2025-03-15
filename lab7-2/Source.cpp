@@ -1,7 +1,7 @@
 #include "header.h"
 
 int main() {
-	const int len = 100000;
+	const int len = 100;
 	double* arr;
 	arr = new double[len];
 	for (int i = 0; i < len; i++)
@@ -20,26 +20,17 @@ int main() {
 		scndPart[i] = arr[i + (len / 2)];
 	}
 
-	auto beginSort = std::chrono::steady_clock::now();
+	std::future <void> thread1(std::async(sortPart, "thread1", frstPart, len / 2));
+	std::future <void> thread2(std::async(sortPart, "thread2", scndPart, len / 2));
 
-	sortPart(frstPart, len / 2);
+    thread1.join();
+	thread2.get();
 
-	sortPart(scndPart, len / 2);
+	std::future <void> thread3(std::async(sortArr, "thread3", arr, frstPart, scndPart, len));
+	thread3.get();
 
-	sortArr(arr, frstPart, scndPart, len);
+	std::cout << "\nSorting completed\n";
 
-	auto endSort = std::chrono::steady_clock::now();
-	auto timeSort = std::chrono::duration_cast<std::chrono::milliseconds>(endSort - beginSort);
-	std::cout << timeSort.count() << std::endl;
-
-	for (int i = 0; i < 100; i++)
-	{
-		std::cout << arr[i] << "\n";
-	}
-	for (int i = 0; i < 100; i++)
-	{
-		std::cout << arr[len-i-1] << "\n";
-	}
 	delete[] arr;
 	delete[] frstPart;
 	delete[] scndPart;
