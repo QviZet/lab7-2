@@ -3,6 +3,7 @@
 #include <chrono>
 #include <future>
 #include <string>
+#include <thread>
 
 void sortPart(std::string name, double* arr, int len);
 

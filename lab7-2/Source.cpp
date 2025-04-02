@@ -1,6 +1,6 @@
 #include "header.h"
 
-int main() {
+int main(int argc, const char* argv[]) {
 	const int len = 100;
 	double* arr;
 	arr = new double[len];
@@ -22,8 +22,7 @@ int main() {
 
 	std::future <void> thread1(std::async(sortPart, "thread1", frstPart, len / 2));
 	std::future <void> thread2(std::async(sortPart, "thread2", scndPart, len / 2));
-
-    thread1.join();
+    thread1.get();
 	thread2.get();
 
 	std::future <void> thread3(std::async(sortArr, "thread3", arr, frstPart, scndPart, len));
